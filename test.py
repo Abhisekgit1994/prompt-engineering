@@ -7,7 +7,7 @@ import openai
 from utils import LLMFunctions, ColumnSuggestions
 from transform import Transform
 # openai.api_key = "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"
-llm = LLMFunctions()
+# llm = LLMFunctions()
 
 
 tbl_a = pd.read_csv('table_A.csv')
@@ -16,11 +16,11 @@ tbl_b = pd.read_csv('table_B.csv')
 tbl_b_cols = tbl_b.columns.to_list()
 template = pd.read_csv('template.csv')
 
-suggest = ColumnSuggestions(template)
+# suggest = ColumnSuggestions(template)
 
 print(tbl_a_cols)
 template_data = template['PolicyNumber'].to_string()
-candidate = tbl_a['Policy_No'].to_string()
+candidate = tbl_a['Policy_No'].to_list()
 
 # trans = Transform()
 
@@ -40,12 +40,12 @@ candidate = tbl_a['Policy_No'].to_string()
 #
 # code = response.choices[-1].text.strip()
 
-# code = """
-# for i in range(len(candidate_data)):\n\tcandidate_data[i]=candidate_data[i].replace("-", "")
-# """
-# print(code)
-# exec(code, {'candidate_data': candidate})
-# print(candidate)
+code = """
+for i in range(len(candidate_data)):\n\tcandidate_data[i]=candidate_data[i].replace("-", "")
+"""
+print(code)
+exec(code, {'candidate_data': candidate})
+print(candidate)
 
 
 

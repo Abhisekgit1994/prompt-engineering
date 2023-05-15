@@ -40,13 +40,22 @@ with col1:
             st.session_state.selected_option = comm[0]
         selected_option = st.selectbox('Select an option:', comm)
         st.session_state.selected_option = selected_option
-        selected_data = table_a_df[selected_option].to_string()
+        selected_data = table_a_df[selected_option].to_list()
         st.write(f'Showing data for {selected_option}')
         st.write(selected_data)
 
         suggest_code = transformation.generate_code(template_data, selected_data)
-        user_edit = st.text_area('generated code', suggest_code)
-        st.write("Edited code", user_edit)
+        if suggest_code:
+            default_text = suggest_code
+            if 'text' not in st.session_state:
+                st.session_state.text = default_text
+            user_edit = st.text_area('generated code', st.session_state.text)
+            # exec(suggest_code, {'candidate_data': selected_data})
+            # st.write("Transformed data", user_edit)
+            code = f"""{user_edit}"""
+            exec(code, {'candidate_data': selected_data})
+            st.write(selected_data)
+
 #
 #
 # with col2:
