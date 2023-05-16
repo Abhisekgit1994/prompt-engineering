@@ -6,7 +6,7 @@ import pandas as pd
 
 class LLMFunctions:
     def __init__(self):
-        openai.api_key = "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"
+        openai.api_key = ""
         self.model_name = 'davinci:ft-personal-2023-05-11-22-58-24'
 
     @staticmethod
@@ -40,7 +40,7 @@ class LLMFunctions:
 class ColumnSuggestions:
     def __init__(self, template):
         self.template_cols = template.columns.to_list()
-        openai.api_key = "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"
+        openai.api_key = ""
 
     @staticmethod
     def common_cols(column, response):

@@ -4,7 +4,7 @@ import json
 
 class Transform:
     def __init__(self):
-        openai.api_key = "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"
+        openai.api_key = ""
 
     @staticmethod
     def generate_code(template, candidate):

@@ -3,7 +3,7 @@ import os
 import pandas as pd
 import openai
 import tkinter as tk
-openai.api_key = "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"
+openai.api_key = ""
 
 model_name = 'davinci:ft-personal-2023-05-11-22-58-24'
 
