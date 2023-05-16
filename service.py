@@ -54,7 +54,7 @@ def main():
                     st.session_state.selected_option[col] = default_text
                 selected_option = st.selectbox('Select an option:', comm)
                 st.session_state.selected_option[col] = selected_option
-                selected_data = table_a_df[selected_option].to_list()
+                selected_data = table_a_df[selected_option].to_string()
                 st.write(f'Showing data for {selected_option}')
                 st.write(selected_data)
                 t = threading.Thread(target=transform_data, args=(col, template_data, selected_data, st.session_state['text']))
@@ -62,6 +62,7 @@ def main():
                 t.start()
             for t in threads:
                 t.join()
+
 
 if __name__ == "__main__":
     main()

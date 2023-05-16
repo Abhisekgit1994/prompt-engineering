@@ -14,7 +14,7 @@ class Transform:
         :param candidate: candidate table column
         :return: generated code to transform
         """
-        prompt = f"Given the following template data and candidate data, generate only the code to transform data from candidate data to template data format." \
+        prompt = f"Given the following template data and candidate data, generate python code to transform data from candidate data to template data format." \
                      f"\n\nTemplate data:\n{template}\n\nCandidate data:\n{candidate}\n\nThe generated code should output a list of values in the template format using the candidate data."
 
         response = openai.Completion.create(

@@ -6,7 +6,7 @@ import pandas as pd
 import openai
 from utils import LLMFunctions, ColumnSuggestions
 from transform import Transform
-# openai.api_key = "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"
+openai.api_key = ""
 # llm = LLMFunctions()
 
 
@@ -19,33 +19,34 @@ template = pd.read_csv('template.csv')
 # suggest = ColumnSuggestions(template)
 
 print(tbl_a_cols)
-template_data = template['PolicyNumber'].to_string()
-candidate = tbl_a['Policy_No'].to_list()
+template_data = template['Plan'].to_string()
+candidate = tbl_a['Insurance_Plan'].to_string()
 
 # trans = Transform()
 
 # print(trans.generate_code(template_data, candidate))
 
-# prompt = f"Given the following template data and candidate data, generate only the code to transform data from candidate data to template data format." \
-#          f"\n\nTemplate data:\n{template_data}\n\nCandidate data:\n{candidate}\n\nThe generated code should output a list of values in the template format using the candidate data."
-#
-# response = openai.Completion.create(
-#             engine="text-davinci-002",
-#             prompt=prompt,
-#             max_tokens=100,
-#             n=1,
-#             stop=None,
-#             temperature=0.5
-#         )
-#
-# code = response.choices[-1].text.strip()
+prompt = f"Given the following template data and candidate data, generate a python code to transform data from candidate data to template data format." \
+         f"\n\nTemplate data:\n{template_data}\n\nCandidate data:\n{candidate}\n\nThe generated code should output a list of values in the template format using the candidate data."
 
-code = """
-for i in range(len(candidate_data)):\n\tcandidate_data[i]=candidate_data[i].replace("-", "")
-"""
+response = openai.Completion.create(
+            engine="text-davinci-002",
+            prompt=prompt,
+            max_tokens=100,
+            n=1,
+            stop=None,
+            temperature=0.5
+        )
+
+code = response.choices[-1].text.strip()
 print(code)
-exec(code, {'candidate_data': candidate})
-print(candidate)
+
+# code = """
+# for i in range(len(candidate_data)):\n\tcandidate_data[i]=candidate_data[i].replace("-", "")
+# """
+# print(code)
+# exec(code, {'candidate_data': candidate})
+# print(candidate)
 
 
 
