@@ -4,7 +4,7 @@ import json
 
 class Transform:
     def __init__(self):
-        openai.api_key = "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"
+        openai.api_key = "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"
 
     @staticmethod
     def generate_code(template, candidate):
@@ -18,7 +18,7 @@ class Transform:
                      f"\n\nTemplate data:\n{template}\n\nCandidate data:\n{candidate}\n\nThe generated code should output a list of values in the template format using the candidate data."
 
         response = openai.Completion.create(
-            engine="text-davinci-002",
+            engine="text-davinci-003",
             prompt=prompt,
             max_tokens=100,
             n=1,

@@ -6,7 +6,7 @@ import pandas as pd
 
 class LLMFunctions:
     def __init__(self):
-        openai.api_key = "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"
+        openai.api_key = "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"
         self.model_name = 'davinci:ft-personal-2023-05-11-22-58-24'
 
     @staticmethod
@@ -19,12 +19,12 @@ class LLMFunctions:
 
             # print(prompt)
             response = openai.Completion.create(
-                engine="text-davinci-002",
+                engine="text-davinci-003",
                 prompt=prompt,
                 max_tokens=100,
                 n=1,
                 stop=None,
-                temperature=0.5,
+                temperature=0.2,
             )
             # Parse the response and get the suggested column
             suggestion = response.choices[0].text.strip()
@@ -40,7 +40,7 @@ class LLMFunctions:
 class ColumnSuggestions:
     def __init__(self, template):
         self.template_cols = template.columns.to_list()
-        openai.api_key = "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"
+        openai.api_key = "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"
 
     @staticmethod
     def common_cols(column, response):
