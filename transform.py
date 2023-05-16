@@ -18,7 +18,7 @@ class Transform:
                      f"\n\nTemplate data:\n{template}\n\nCandidate data:\n{candidate}\n\nThe generated code should output a list of values in the template format using the candidate data."
 
         response = openai.Completion.create(
-            engine="text-davinci-003",
+            engine="text-davinci-002",
             prompt=prompt,
             max_tokens=100,
             n=1,
@@ -27,5 +27,4 @@ class Transform:
         )
 
         code = response.choices[-1].text.strip()
-        # print(code)
         return code

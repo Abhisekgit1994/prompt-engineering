@@ -19,7 +19,7 @@ class LLMFunctions:
 
             # print(prompt)
             response = openai.Completion.create(
-                engine="text-davinci-003",
+                engine="text-davinci-002",
                 prompt=prompt,
                 max_tokens=100,
                 n=1,

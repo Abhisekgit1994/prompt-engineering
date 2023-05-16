@@ -4,6 +4,7 @@ import datetime
 import os
 import re
 import openai
+import pdb
 import threading
 from utils import LLMFunctions, ColumnSuggestions
 from transform import Transform
@@ -19,11 +20,9 @@ col1, col2 = st.columns(2)
 def transform_data(col, template_data, selected_data):
     suggest_code = transformation.generate_code(template_data, selected_data)
     if suggest_code:
-        default_text = suggest_code
-        if 'text' not in st.session_state:
-            st.session_state.text = {}
-        if col not in st.session_state.text:
-            st.session_state.text[col] = default_text
+        default = suggest_code
+        if col not in st.session_state['text']:
+            st.session_state.text[col] = default
         user_edit = st.text_area(f'generated code for {col}', st.session_state.text[col])
         # exec(suggest_code, {'candidate_data': selected_data})
         # st.write("Transformed data", user_edit)
@@ -50,7 +49,9 @@ with col1:
             comm = list(set(all_cols).intersection(tbl_a_cols))
             default_text = comm[0]
             if "selected_option" not in st.session_state:
-                st.session_state.selected_option = {}
+                st.session_state['selected_option'] = {}
+            if 'text' not in st.session_state:
+                st.session_state['text'] = {}
             if col not in st.session_state.selected_option:
                 st.session_state.selected_option[col] = default_text
             selected_option = st.selectbox('Select an option:', comm)
@@ -58,10 +59,9 @@ with col1:
             selected_data = table_a_df[selected_option].to_list()
             st.write(f'Showing data for {selected_option}')
             st.write(selected_data)
-
-        #     t = threading.Thread(target=transform_data, args=(col, template_data, selected_data))
-        #     threads.append(t)
-        #     t.start()
-        # for t in threads:
-        #     t.join()
+            t = threading.Thread(target=transform_data, args=(col, template_data, selected_data))
+            threads.append(t)
+            t.start()
+        for t in threads:
+            t.join()
 
