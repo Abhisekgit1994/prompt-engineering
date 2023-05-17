@@ -4,10 +4,10 @@ import datetime
 import os
 import re
 import openai
-import pdb
 import threading
 from utils import LLMFunctions, ColumnSuggestions
 from transform import Transform
+
 # state = st.session_state.get(template=None, table_a=None, selected_options={})
 llm = LLMFunctions()
 transformation = Transform()
@@ -30,12 +30,13 @@ def transform_data(col, template_data, selected_data, session):
         exec(code, {'candidate_data': selected_data})
         st.write(selected_data)
 
+
 def main():
     st.session_state['selected_option'] = {}
     st.session_state['text'] = {}
-    table_a = st.file_uploader('upload candidate table ', type=["csv"])
-    template = st.file_uploader('upload Template table', type=["csv"])
     with col1:
+        table_a = st.file_uploader('upload candidate table ', type=["csv"])
+        template = st.file_uploader('upload Template table', type=["csv"])
         if table_a and template is not None:
             template = pd.read_csv(template)
             suggest = ColumnSuggestions(template)
