@@ -4,14 +4,16 @@ import pandas as pd
 import openai
 import tkinter as tk
 openai.api_key = ""
+from utils import LLMFunctions
 
-model_name = 'davinci:ft-personal-2023-05-11-22-58-24'
+# model_name = 'davinci:ft-personal-2023-05-11-22-58-24'
+llm = LLMFunctions()
 
 
 def on_submit():
     prompt = input_field.get()
 
-    completion = openai.Completion.create(model=model_name, prompt=prompt, max_tokens=256, stop=None, temperature=0.2)
+    completion = llm.generate_text_description(prompt)
 
     input_field.delete(0, "end")
 
