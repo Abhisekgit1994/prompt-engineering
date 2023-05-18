@@ -2,7 +2,7 @@ import datetime
 import os
 import pandas as pd
 import openai
-import tkinter as tk
+import description as tk
 openai.api_key = ""
 
 model_name = 'davinci:ft-personal-2023-05-11-22-58-24'

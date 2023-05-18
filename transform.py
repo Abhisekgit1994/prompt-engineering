@@ -15,7 +15,7 @@ class Transform:
         :return: generated code to transform
         """
         prompt = f"Given the following template data and candidate data, generate python code to transform data from candidate data to template data format." \
-                     f"\n\nTemplate data:\n{template}\n\nCandidate data:\n{candidate}\n\nThe generated code should output a list of values in the template format using the candidate data."
+                     f"\n\nTemplate data:\n{template}\n\nCandidate data:\n{candidate}\n\nThe generated code should replace the values of  candidate data."
 
         response = openai.Completion.create(
             engine="text-davinci-002",
@@ -23,7 +23,7 @@ class Transform:
             max_tokens=100,
             n=1,
             stop=None,
-            temperature=0.5
+            temperature=0.2
         )
 
         code = response.choices[-1].text.strip()

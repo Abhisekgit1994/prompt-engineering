@@ -19,7 +19,7 @@ col1, col2 = st.columns(2)
 
 def transform_data(col, template_data, selected_data, session):
     suggest_code = transformation.generate_code(template_data, selected_data)
-    # print(suggest_code)
+
     if suggest_code:
         default = suggest_code
         if col not in session:
