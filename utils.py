@@ -40,7 +40,6 @@ class LLMFunctions:
 class ColumnSuggestions:
     def __init__(self, template):
         self.template_cols = template.columns.to_list()
-        openai.api_key = ""
 
     @staticmethod
     def common_cols(column, response):
